@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>spring-mvc</artifactId>
+		<groupId>org.springmvc</groupId>
+		<version>1.0</version>
+	</parent>
+
+	<groupId>org.springmvc</groupId>
+	<artifactId>spring-mvc-model</artifactId>
+	<packaging>jar</packaging>
+	<version>1.0</version>
+
+	<name>spring-mvc-model</name>
+	<url>http://maven.apache.org</url>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-annotations</artifactId>
+			<version>3.4.0.GA</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>hibernate-core</artifactId>
+					<groupId>org.hibernate</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-commons-annotations</artifactId>
+			<version>3.3.0.ga</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>hibernate</artifactId>
+					<groupId>org.hibernate</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>javax.persistence</groupId>
+			<artifactId>persistence-api</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<target>1.6</target>
+					<source>1.6</source>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

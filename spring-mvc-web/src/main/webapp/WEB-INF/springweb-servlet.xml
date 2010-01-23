@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+	
+	<!-- context:component-scan base-package="org.springmvc.annot.controller"></context:component-scan -->
+	
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/jsp/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+	
+	<!-- 
+	<bean id="homePageCo" class="org.himu.springweb.co.HomePageController" />
+	<bean id="hello_world" class="org.springmvc.controller.HelloWorldController" />
+
+	<bean id="loanCalcCo" class="org.himu.springweb.demo.LoanCalcController">
+		<property name="formView" value="loanCalc" />
+		<property name="successView" value="loanCalcResult" />
+		<property name="commandName" value="loanInfo" />
+		<property name="commandClass" value="org.himu.springweb.demo.LoanInfo" />
+		<property name="validator">
+			<bean class="org.himu.springweb.demo.LoanCalcValidator" />
+		</property>
+	</bean>
+	
+	<bean id="personPage" class="org.springmvc.controller.MyFormController" >
+		<property name="formView" value="person/addPerson"/>
+		<property name="successView" value="person/personAdded"/>
+		<property name="commandName" value="person"/>
+		<property name="commandClass" value="org.springmvc.controller.Person"/>
+	</bean>
+
+	<bean id="simpleUrlMapping"
+		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="mappings">
+			<props>
+				<prop key="/home.htm">homePageCo</prop>
+				<prop key="/loancalc.htm">loanCalcCo</prop>
+				<prop key="/hello_world.htm">hello_world</prop>
+				<prop key="/person.htm">personPage</prop>
+			</props>
+		</property>
+	</bean>
+	
+	 -->
+
+
+
+	<!--
+		<bean id="urlBasedViewResolver"
+		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<property name="viewClass"
+		value="org.springframework.web.servlet.view.tiles2.TilesView"/>
+		<property name="order" value="1"/> </bean> <bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames"> <list> <value>messages</value>
+		<value>errors</value> </list> </property> </bean>
+	-->
+</beans>
