@@ -15,7 +15,8 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-			classpath:application-jpa-context.xml
+			classpath:application-jpa-context.xml,
+			classpath:app-jpa-dao-ctx.xml
     </param-value>
 	</context-param>
 
