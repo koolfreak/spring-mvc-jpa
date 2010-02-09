@@ -3,11 +3,11 @@
  */
 package org.springmvc.test;
 
-import org.apache.commons.dbcp.BasicDataSource;
+//import org.apache.commons.dbcp.BasicDataSource;
 import org.mortbay.jetty.Connector;
 import org.mortbay.jetty.Server;
 import org.mortbay.jetty.bio.SocketConnector;
-import org.mortbay.jetty.plus.naming.Resource;
+//import org.mortbay.jetty.plus.naming.Resource;
 import org.mortbay.jetty.webapp.WebAppContext;
 
 /**
@@ -32,7 +32,7 @@ public class StartJettyDS
 		bb.setContextPath("/swiftstar");
 		bb.setWar("src/main/webapp");
 		
-		BasicDataSource ds = new BasicDataSource();
+		/*BasicDataSource ds = new BasicDataSource();
 		ds.setUsername("admin");
 		ds.setPassword("admin");
 		ds.setUrl("jdbc:postgresql://localhost/swiftstar");
@@ -53,33 +53,8 @@ public class StartJettyDS
 	           // server.start();
 	        } catch (Exception e) {
 	            throw new RuntimeException("Jetty startup problems", e);
-	        }
+	        }*/
 
-		/*BasicDataSource ds = new BasicDataSource();
-		ds.setUsername("admin");
-		ds.setPassword("admin");
-		ds.setUrl("jdbc:postgresql://localhost/swiftstar");
-		ds.setDriverClassName("org.postgresql.Driver");
-		
-		Hashtable<String, Object> env = new Hashtable<String, Object>();
-		env.put(Context.INITIAL_CONTEXT_FACTORY, "org.mortbay.naming.InitialContextFactory");
-		
-		try
-		{
-			Context ctx = new InitialContext(env);
-			ctx.bind("jdbc/swiftstar_ds", ds);
-		}
-		catch (NamingException e1)
-		{
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}*/
-		// START JMX SERVER
-		// MBeanServer mBeanServer = ManagementFactory.getPlatformMBeanServer();
-		// MBeanContainer mBeanContainer = new MBeanContainer(mBeanServer);
-		// server.getContainer().addEventListener(mBeanContainer);
-		// mBeanContainer.start();
-		
 		server.addHandler(bb);
 
 		try {
