@@ -5,9 +5,11 @@ package org.springmvc.web.controller.person;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springmvc.model.Person;
 import org.springmvc.service.person.PersonManager;
 
 /**
@@ -19,9 +21,20 @@ public class PersonController
 {
 	@Autowired private PersonManager personManager;
 	
-	@RequestMapping(value = "/person/add.htm", method = RequestMethod.GET)
+	@RequestMapping(value = "/person/list", method = RequestMethod.GET)
 	public ModelAndView loadAllPerson()
 	{
-		return new ModelAndView().addObject("persons",personManager.loadAll());
+		return new ModelAndView("person/list").addObject("persons",personManager.loadAll() );
 	}
+	
+	@RequestMapping(value = "/person/add", method = RequestMethod.POST)
+	public ModelAndView savePerson(@ModelAttribute(value="person")Person person)
+	{
+		personManager.save(person);
+		
+		return new ModelAndView("redirect:/person/list.htm");
+	}
+	
+	@RequestMapping(value = "/person/add", method = RequestMethod.GET)
+	public void add(@ModelAttribute(value="person")Person person){}
 }
