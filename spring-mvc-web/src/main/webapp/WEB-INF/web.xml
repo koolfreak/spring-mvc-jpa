@@ -24,7 +24,7 @@
 		<description>Spring MVC Dispatcher Servlet</description>
 		<servlet-name>springweb</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-		<load-on-startup>2</load-on-startup>
+		<load-on-startup>1</load-on-startup>
 	</servlet>
 
 	<servlet-mapping>

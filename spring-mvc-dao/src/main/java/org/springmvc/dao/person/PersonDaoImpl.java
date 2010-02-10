@@ -5,6 +5,7 @@ package org.springmvc.dao.person;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import org.springframework.dao.DataAccessException;
@@ -46,7 +47,8 @@ public class PersonDaoImpl extends JpaDaoSupport implements PersonDao
 	@SuppressWarnings("unchecked")
 	public List<Person> loadAll() throws DataAccessException
 	{
-		Query qry = getJpaTemplate().getEntityManager().createNativeQuery("from Person",Person.class);
+		EntityManager em = getJpaTemplate().getEntityManagerFactory().createEntityManager();
+		Query qry = em.createQuery("select person from Person person");
 		return qry.getResultList();
 	}
 }
