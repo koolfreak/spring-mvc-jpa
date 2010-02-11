@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema
+		xmlns="http://cybernetics.com/ws/schemas"
+		xmlns:xs="http://www.w3.org/2001/XMLSchema"
+		targetNamespace="http://cybernetics.com/ws/schemas"
+		elementFormDefault="unqualified" attributeFormDefault="unqualified">
+		
+		
+		<xs:element name="PersonDetails">
+			<xs:complexType>
+				<xs:sequence>
+					<xs:element></xs:element>
+				</xs:sequence>
+			</xs:complexType>
+		</xs:element>
+		
+		<xs:element name="Firstname">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:maxLength value="25"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:element>
+</xs:schema>

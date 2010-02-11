@@ -3,14 +3,20 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:tx="http://www.springframework.org/schema/tx"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	xmlns:dwr="http://www.directwebremoting.org/schema/spring-dwr"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+		http://www.directwebremoting.org/schema/spring-dwr http://www.directwebremoting.org/schema/spring-dwr-2.0.xsd">
 
-	<context:property-placeholder location="classpath:jdbc-jpa.properties"/>
-	<context:component-scan base-package="org.springmvc.service"/>
-	<tx:annotation-driven/>
-	
+	<context:property-placeholder location="classpath:jdbc-jpa.properties" />
+	<context:component-scan base-package="org.springmvc.service" />
+	<tx:annotation-driven />
+
 	<!-- Datasource -->
 	<bean id="dataSource"
 		class="com.mysql.jdbc.jdbc2.optional.MysqlConnectionPoolDataSource">
@@ -18,29 +24,54 @@
 		<property name="user" value="${jdbc.username}" />
 		<property name="password" value="${jdbc.password}" />
 	</bean>
-	
+
 	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="persistenceUnitName" value="spring-jpa-unit"/>
+		<property name="persistenceUnitName" value="spring-jpa-unit" />
 		<property name="jpaVendorAdapter">
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
 				<property name="showSql" value="true" />
 				<property name="generateDdl" value="true" />
 				<property name="database" value="MYSQL" />
-				<property name="databasePlatform" value="${hibernate.dialect}"/>
+				<property name="databasePlatform" value="${hibernate.dialect}" />
 			</bean>
 		</property>
-		<!-- property name="loadTimeWeaver">
-			<bean class="org.springframework.instrument.classloading.SimpleLoadTimeWeaver"/>
-		</property -->
+		<!--
+			property name="loadTimeWeaver"> <bean
+			class="org.springframework.instrument.classloading.SimpleLoadTimeWeaver"/>
+			</property
+		-->
 	</bean>
 
-	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager" >
-		<property name="entityManagerFactory" ref="entityManagerFactory"/>
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
-	
-	<context:component-scan base-package="org.springmvc.service"/>
-	<tx:annotation-driven/>
+
+	<context:component-scan base-package="org.springmvc.service" />
+	<tx:annotation-driven />
+
+	<!-- dwr configuratio -->
+	<dwr:configuration />
+	<dwr:controller id="dwrController" debug="true" />
+
+	<bean id="beanUrlMapping"
+		class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping">
+		<property name="order" value="0" />
+	</bean>
+
+	<bean id="dwrUrlMappings"
+		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="order" value="1" />
+		<property name="urlMap">
+			<util:map>
+				<entry key="/engine.js" value-ref="dwrController" />
+				<entry key="/interface.js" value-ref="dwrController" />
+				<entry key="/call/**" value-ref="dwrController" />
+				<entry key="/interface/**" value-ref="dwrController" />
+			</util:map>
+		</property>
+	</bean>
+
 
 </beans>
