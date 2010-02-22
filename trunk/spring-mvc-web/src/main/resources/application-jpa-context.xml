@@ -50,7 +50,8 @@
 
 	<context:component-scan base-package="org.springmvc.service" />
 	<tx:annotation-driven />
-
+	<aop:scoped-proxy proxy-target-class="false" /> 
+	
 	<!-- dwr configuratio -->
 	<dwr:configuration />
 	<dwr:controller id="dwrController" debug="true" />
