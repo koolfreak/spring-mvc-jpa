@@ -41,7 +41,7 @@
 		<servlet-name>springweb</servlet-name>
 		<url-pattern>*.htm</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<description>DWR Servlet</description>
 		<servlet-name>dwrweb</servlet-name>

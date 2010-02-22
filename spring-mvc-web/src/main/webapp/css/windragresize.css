@@ -1,0 +1,51 @@
+.window {
+	background-color: #000000;
+	border-color: #000000;
+	border-style: solid;
+	border-width: 0px;
+	margin: 2px;
+	padding: 2px;
+	position: absolute;
+	text-align: left;
+	visibility: hidden;
+}
+
+.titleBar {
+	background-color: #2f3192;
+	cursor: default;
+	color: #f3c618;
+	font-family: "MS Sans Serif", "Arial", "Helvetica", sans-serif;
+	font-size: 8pt;
+	font-weight: bold;
+	margin: 0px;
+	padding: 2px 2px 2px .5em;
+	text-align: right;
+	white-space: nowrap;
+}
+
+.titleBarText {
+	float: left;
+	overflow: hidden;
+	text-align: left;
+}
+
+.titleBarButtons {
+	border-style: none;
+	border-width: 0px;
+	vertical-align: middle;
+	width: 50px;
+	height: 14px;
+}
+
+.clientArea {
+	background-color: #f0fdb4;
+	border-color: #f8efef;
+	border-style: solid;
+	border-width: 1px;
+	color: #000000;
+	font-family: "Arial", "Helvetica", sans-serif;
+	font-size: 10pt;
+	margin: 2px 0px 0px 0px;
+	overflow: auto;
+	padding: .5em;
+}
