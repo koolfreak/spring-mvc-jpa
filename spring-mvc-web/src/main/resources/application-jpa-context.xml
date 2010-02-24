@@ -50,10 +50,14 @@
 
 	<context:component-scan base-package="org.springmvc.service" />
 	<tx:annotation-driven />
-	<aop:scoped-proxy proxy-target-class="false" /> 
+	<!-- aop:scoped-proxy proxy-target-class="false" / --> 
+	
+	
 	
 	<!-- dwr configuratio -->
-	<dwr:configuration />
+	<dwr:configuration>
+		<dwr:convert type="bean" class="org.springmvc.model.Person"/>
+	</dwr:configuration>
 	<dwr:controller id="dwrController" debug="true" />
 
 	<bean id="beanUrlMapping"
@@ -74,5 +78,9 @@
 		</property>
 	</bean>
 
+	<bean id="dwrExposed" class="org.springmvc.web.dwr.DwrImpl">
+		<property name="personManager" ref="personManager"/>
+		<dwr:remote javascript="DwrPersonJavascript"/>
+	</bean>
 
 </beans>

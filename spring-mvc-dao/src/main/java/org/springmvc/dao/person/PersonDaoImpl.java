@@ -34,7 +34,7 @@ public class PersonDaoImpl extends JpaDaoSupport implements PersonDao
 		getJpaTemplate().remove(person);
 	}
 
-	public Person load(Long id) throws DataAccessException
+	public Person load(int id) throws DataAccessException
 	{
 		return getJpaTemplate().find(Person.class, id);
 	}

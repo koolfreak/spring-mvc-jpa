@@ -22,7 +22,7 @@ public class PersonManagerImpl implements PersonManager
 	 * @see org.springmvc.service.person.PersonManager#load(java.lang.Long)
 	 */
 	@Override
-	public Person load(Long id)
+	public Person load(int id)
 	{
 		return personDao.load(id);
 	}

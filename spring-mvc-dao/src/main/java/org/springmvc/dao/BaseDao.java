@@ -20,7 +20,7 @@ public interface BaseDao<T>
 	
 	T update(T entity) throws DataAccessException;
 	
-	T load(Long id) throws DataAccessException;
+	T load(int id) throws DataAccessException;
 	
 	List<T> loadAll() throws DataAccessException;
 }
