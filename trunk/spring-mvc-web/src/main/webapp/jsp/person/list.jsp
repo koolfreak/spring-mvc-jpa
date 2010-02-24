@@ -1,30 +1,50 @@
 
-<%@ include file="/includes/include.jsp" %>
+<%@ include file="/includes/include.jsp"%>
 
 <html>
-	<head>
-	
-	</head>
+<head>
+	<script type="text/javascript" language="JavaScript"	src="<c:url value='/javascript/dwr/dwr-remoting.js'/>"></script>
+	<script type="text/javascript" src="<c:url value='/dwr/interface/DwrPersonJavascript.js'/>"></script>
+	<script type="text/javascript" src="<c:url value='/dwr/engine.js'/>"></script>
+	<script type="text/javascript" src="<c:url value='/dwr/util.js'/>"></script>
+	<link rel="stylesheet" href="<%= request.getContextPath() %>/css/windragresize.css" type="text/css">
+</head>
 <body>
 
-	<table border="1">
+<table border="1">
+	<tr>
+		<td>First Name</td>
+		<td>Last Name</td>
+		
+	</tr>
+	<c:forEach items="${persons}" var="person">
 		<tr>
-			<td>First Name</td>
-			<td>Last Name</td>
-			<td>Middle Initial</td>
-			<td>Address</td>
-			<td>City</td>
+			<td>
+				<a href="javascript: DwrRemotingEvent.getPersonById('${person.id}')">
+					<c:out value="${person.firstName}"></c:out>
+				</a>
+			</td>
+			<td><c:out value="${person.lastName}"></c:out></td>
+			<!--  
+			<td><c:out value="${person.middleInitial}"></c:out></td>
+			<td><c:out value="${person.streetAddress1}"></c:out>,<c:out
+				value="${person.streetAddress2}"></c:out></td>
+			<td><c:out value="${person.city}"></c:out></td>
+			-->
 		</tr>
-		<c:forEach items="${persons}" var="person" >
-			<tr>
-				<td><c:out value="${person.firstName}" ></c:out></td>
-				<td><c:out value="${person.lastName}"></c:out></td>
-				<td><c:out value="${person.middleInitial}"></c:out></td>
-				<td><c:out value="${person.streetAddress1}"></c:out>,<c:out value="${person.streetAddress2}"></c:out></td>
-				<td><c:out value="${person.city}"></c:out></td>
-			</tr>
-		</c:forEach>
-	</table>
+	</c:forEach>
+</table>
+
+<div id="personDetails" width="400" style="display: none;border: solid 1px #000000;">
+	<ul>
+		<li>First Name:&nbsp;<span id="personFname"></span></li>
+		<li>Middle Initial:&nbsp;<span id="personInitial"></span></li>
+		<li>Last Name:&nbsp;<span id="personLname"></span></li>
+		<li>Address 1:&nbsp;<span id="personAdd1"></span></li>
+		<li>Address 2:&nbsp;<span id="personAdd2"></span></li>
+		<li>City:&nbsp;<span id="personCity"></span></li>
+	</ul>
+</div>
 
 </body>
 </html>

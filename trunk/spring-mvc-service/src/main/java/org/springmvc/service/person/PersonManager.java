@@ -23,7 +23,7 @@ public interface PersonManager
 	Person update(Person person);
 
 	@Transactional(readOnly = true)
-	Person load(Long id);
+	Person load(int id);
 
 	@Transactional(readOnly = true)
 	List<Person> loadAll();
