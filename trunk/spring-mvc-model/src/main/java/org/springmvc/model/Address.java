@@ -22,16 +22,6 @@ public class Address
 	{
 	}
 
-	public Address(final String sa1, final String sa2, final String city,
-			final String state, final String zip)
-	{
-		setStreetAddress1(sa1);
-		setStreetAddress2(sa2);
-		setCity(city);
-		setState(state);
-		setZip(zip);
-	}
-
 	public final String getCity()
 	{
 		return city;

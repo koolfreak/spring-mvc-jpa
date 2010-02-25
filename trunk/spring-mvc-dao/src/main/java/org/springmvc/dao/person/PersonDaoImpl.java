@@ -6,9 +6,11 @@ package org.springmvc.dao.person;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 
 import org.springframework.dao.DataAccessException;
+import org.springframework.orm.jpa.JpaCallback;
 import org.springframework.orm.jpa.support.JpaDaoSupport;
 import org.springmvc.model.Person;
 
@@ -47,19 +49,28 @@ public class PersonDaoImpl extends JpaDaoSupport implements PersonDao
 	@SuppressWarnings("unchecked")
 	public List<Person> loadAll() throws DataAccessException
 	{
-		EntityManager em = getJpaTemplate().getEntityManagerFactory().createEntityManager();
-		Query qry = em.createQuery("select person from Person person");
-		return qry.getResultList();
+		return (List<Person>) getJpaTemplate().execute(new JpaCallback()
+		{
+			@Override
+			public Object doInJpa(EntityManager em) throws PersistenceException
+			{
+				Query qry = em.createQuery("select person from Person person");
+				return qry.getResultList();
+			}
+		},true);
 	}
 
-	@SuppressWarnings("unchecked")
-	public Person loadByUsername(String username) throws DataAccessException
+	public Person loadByUsername(final String username) throws DataAccessException
 	{
-		List<Person> result = getJpaTemplate().findByNamedQuery("loadByUsername", username);
-		if( !result.isEmpty() )
+		return (Person) getJpaTemplate().execute(new JpaCallback()
 		{
-			return (Person) result.get(0);
-		}
-		return null;
+			@Override
+			public Object doInJpa(EntityManager em) throws PersistenceException
+			{
+				Query qry = em.createNamedQuery("loadByUsername");
+				qry.setParameter(1, username);
+				return qry.getSingleResult();
+			}
+		},true); 
 	}
 }
