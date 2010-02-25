@@ -18,7 +18,7 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 
-	<!-- configure spring security filter 
+	<!-- configure spring security filter -->
 	<filter>
 		<filter-name>springSecurityFilterChain</filter-name>
 		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
@@ -28,7 +28,7 @@
 		<filter-name>springSecurityFilterChain</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-	-->
+	
 	
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -38,7 +38,8 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
 			classpath:application-jpa-context.xml,
-			classpath:app-jpa-dao-ctx.xml
+			classpath:app-jpa-dao-ctx.xml,
+			classpath:application-security-ctx.xml
     </param-value>
 	</context-param>
 
@@ -67,7 +68,7 @@
 	</servlet-mapping>
 
 	<welcome-file-list>
-		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>login.jsp</welcome-file>
 	</welcome-file-list>
 
 </web-app>

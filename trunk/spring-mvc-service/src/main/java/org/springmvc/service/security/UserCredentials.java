@@ -24,7 +24,7 @@ public class UserCredentials implements UserDetails
 
 	private boolean credentialsNonExpired = true;
 
-	private boolean enabled;
+	private boolean enabled = true; // TODO: apply DB values
 
 	
 	public UserCredentials(GrantedAuthority[] authorities, String password,

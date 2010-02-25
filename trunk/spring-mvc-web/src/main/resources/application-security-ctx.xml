@@ -5,60 +5,20 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
 		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-2.0.xsd">
 
-	<security:global-method-security secured-annotations="enabled"/>
-	
 	<security:http auto-config="true">
-		<security:intercept-url pattern="/index.html" filters="none" />
-		<security:intercept-url pattern="/**/*.swf" filters="none" />
-        <security:intercept-url pattern="/**/*.swz" filters="none" />
-		<security:intercept-url pattern="/**/*.html" access="ROLE_USER" />
-		<security:intercept-url pattern="/**" filters="none" />
-	</security:http>
-
-	
-	
-	
-	<!-- configuration dao provider -->
-	<bean id="daoAuthenticationProvider"
-		class="org.springframework.security.providers.dao.DaoAuthenticationProvider">
-		<property name="userDetailsService" ref="authenticationService" />
-	</bean>
-
-	<!-- Authentication Manager -->
-	<bean id="authenticationManager"
-		class="org.springframework.security.providers.ProviderManager">
-		<property name="providers">
-			<list>
-				<ref local="daoAuthenticationProvider" />
-			</list>
-		</property>
+		<security:intercept-url pattern="/**/*.htm" filters="none" />
 		
-	</bean>
+		<security:form-login login-page="/login.jsp"
+							 login-processing-url="/j_spring_security_check"
+                        	 authentication-failure-url="/login.jsp?login_error=1"
+                         	 always-use-default-target="true"
+                         	 default-target-url="/person/list.htm"/>
+        
+         <security:remember-me user-service-ref="authManager"/>
+    	 <security:logout logout-url="/j_spring_security_logout" logout-success-url="/login.jsp"/>
+		 <security:concurrent-session-control max-sessions="1" exception-if-maximum-exceeded="false"/>
+	</security:http>
 	
-	<bean id="_objectSource" class="org.springframework.security.annotation.SecuredMethodDefinitionSource" />
-	 
-	<bean id="_methodDefinitionSourceAdvisor" class="org.springframework.security.intercept.method.aopalliance.MethodDefinitionSourceAdvisor">
-		<constructor-arg value="_methodSecurityInterceptor" />
-		<constructor-arg ref="_objectSource" />
-	</bean>
-
-	<bean id="_methodSecurityInterceptor" class="org.springframework.security.intercept.method.aopalliance.MethodSecurityInterceptor">
-		<property name="validateConfigAttributes" value="false" />
-		<property name="authenticationManager" ref="authenticationManager"/>
-		<property name="accessDecisionManager" ref="_accessManager"/>
-		<property name="objectDefinitionSource" ref="_objectSource" />
-	</bean>
+	<security:authentication-provider user-service-ref="authManager"/>
 	
-	<bean id="_accessManager" class="org.springframework.security.vote.AffirmativeBased">
-		<property name="allowIfAllAbstainDecisions" value="false"/>
-		<property name="decisionVoters">
-			<list>
-				<bean class="org.springframework.security.vote.RoleVoter">
-					<property name="rolePrefix" value=""/>
-				</bean>
-				<bean class="org.springframework.security.vote.AuthenticatedVoter"/>
-			</list>
-		</property>
-	</bean>
-
 </beans>
