@@ -43,15 +43,6 @@ public class Person implements Serializable
 	public Person() {
     }
  
-    public Person(final String fn, final char mi, final String ln,
-            final Address address) {
-        setFirstName(fn);
-        setMiddleInitial(mi);
-        setLastName(ln);
-        setAddress(address);
-    }
-
-
 	public String getFirstName()
 	{
 		return firstName;
