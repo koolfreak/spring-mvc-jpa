@@ -16,6 +16,7 @@ import org.springmvc.model.Person;
 @Transactional
 public interface PersonManager
 {
+	
 	void save(Person person);
 
 	void remove(Person person);

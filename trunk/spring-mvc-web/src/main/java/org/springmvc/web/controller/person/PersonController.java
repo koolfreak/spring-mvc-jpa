@@ -3,6 +3,9 @@
  */
 package org.springmvc.web.controller.person;
 
+import java.util.Collections;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -24,7 +27,11 @@ public class PersonController
 	@RequestMapping(value = "/person/list", method = RequestMethod.GET)
 	public ModelAndView loadAllPerson()
 	{
-		return new ModelAndView("person/list").addObject("persons",personManager.loadAll() );
+		ModelAndView mav = new ModelAndView("person/list");
+		
+		List<Person> ps = personManager.loadAll();
+		
+		return mav.addObject("persons",ps);
 	}
 	
 	@RequestMapping(value = "/person/add", method = RequestMethod.POST)

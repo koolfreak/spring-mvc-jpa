@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-2.0.xsd">
+
+	<security:global-method-security secured-annotations="enabled"/>
+	
+	<security:http auto-config="true">
+		<security:intercept-url pattern="/index.html" filters="none" />
+		<security:intercept-url pattern="/**/*.swf" filters="none" />
+        <security:intercept-url pattern="/**/*.swz" filters="none" />
+		<security:intercept-url pattern="/**/*.html" access="ROLE_USER" />
+		<security:intercept-url pattern="/**" filters="none" />
+	</security:http>
+
+	
+	
+	
+	<!-- configuration dao provider -->
+	<bean id="daoAuthenticationProvider"
+		class="org.springframework.security.providers.dao.DaoAuthenticationProvider">
+		<property name="userDetailsService" ref="authenticationService" />
+	</bean>
+
+	<!-- Authentication Manager -->
+	<bean id="authenticationManager"
+		class="org.springframework.security.providers.ProviderManager">
+		<property name="providers">
+			<list>
+				<ref local="daoAuthenticationProvider" />
+			</list>
+		</property>
+		
+	</bean>
+	
+	<bean id="_objectSource" class="org.springframework.security.annotation.SecuredMethodDefinitionSource" />
+	 
+	<bean id="_methodDefinitionSourceAdvisor" class="org.springframework.security.intercept.method.aopalliance.MethodDefinitionSourceAdvisor">
+		<constructor-arg value="_methodSecurityInterceptor" />
+		<constructor-arg ref="_objectSource" />
+	</bean>
+
+	<bean id="_methodSecurityInterceptor" class="org.springframework.security.intercept.method.aopalliance.MethodSecurityInterceptor">
+		<property name="validateConfigAttributes" value="false" />
+		<property name="authenticationManager" ref="authenticationManager"/>
+		<property name="accessDecisionManager" ref="_accessManager"/>
+		<property name="objectDefinitionSource" ref="_objectSource" />
+	</bean>
+	
+	<bean id="_accessManager" class="org.springframework.security.vote.AffirmativeBased">
+		<property name="allowIfAllAbstainDecisions" value="false"/>
+		<property name="decisionVoters">
+			<list>
+				<bean class="org.springframework.security.vote.RoleVoter">
+					<property name="rolePrefix" value=""/>
+				</bean>
+				<bean class="org.springframework.security.vote.AuthenticatedVoter"/>
+			</list>
+		</property>
+	</bean>
+
+</beans>

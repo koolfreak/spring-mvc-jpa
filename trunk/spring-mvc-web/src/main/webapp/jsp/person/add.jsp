@@ -19,13 +19,19 @@
 				<td>Last Name:&nbsp;<form:input path="lastName"/></td>
 			</tr>
 			<tr>
-				<td>Address 1:&nbsp;<form:input path="streetAddress1"/></td>
+				<td>Address 1:&nbsp;<form:input path="address.streetAddress1"/></td>
 			</tr>
 			<tr>
-				<td>Address 2:&nbsp;<form:input path="streetAddress2"/></td>
+				<td>Address 2:&nbsp;<form:input path="address.streetAddress2"/></td>
 			</tr>
 			<tr>
-				<td>City:&nbsp;<form:input path="city"/></td>
+				<td>City:&nbsp;<form:input path="address.city"/></td>
+			</tr>
+			<tr>
+				<td>State:&nbsp;<form:input path="address.state"/></td>
+			</tr>
+			<tr>
+				<td>Zip:&nbsp;<form:input path="address.zip"/></td>
 			</tr>
 		</table>
 		<input type="submit" value="Submit" />

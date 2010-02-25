@@ -13,13 +13,15 @@
 	<url>http://maven.apache.org</url>
 
 	<properties>
+		<spring.security.version>2.0.5.RELEASE</spring.security.version>
 		<spring.version>2.5.6.SEC01</spring.version>
 		<spring.ws.version>1.5.9</spring.ws.version>
 	</properties>
 
 	<dependencyManagement>
 		<dependencies>
-
+			
+			<!-- project dependencies -->
 			<dependency>
 				<groupId>${project.groupId}</groupId>
 				<artifactId>spring-mvc-web</artifactId>
@@ -41,7 +43,7 @@
 				<version>${project.version}</version>
 			</dependency>
 
-			<!-- spring libraries -->
+			<!-- spring core libraries -->
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-orm</artifactId>
@@ -86,6 +88,31 @@
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-aop</artifactId>
 				<version>${spring.version}</version>
+			</dependency>
+
+			<!-- Spring Security -->
+			<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-core-tiger</artifactId>
+				<version>${spring.security.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>org.springframework</groupId>
+						<artifactId>spring-aop</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.springframework</groupId>
+						<artifactId>spring-context</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.springframework</groupId>
+						<artifactId>spring-core</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.springframework</groupId>
+						<artifactId>spring-support</artifactId>
+					</exclusion>
+				</exclusions>
 			</dependency>
 
 			<!-- spring web service -->

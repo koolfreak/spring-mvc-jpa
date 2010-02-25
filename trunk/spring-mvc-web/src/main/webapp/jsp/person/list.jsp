@@ -25,12 +25,6 @@
 				</a>
 			</td>
 			<td><c:out value="${person.lastName}"></c:out></td>
-			<!--  
-			<td><c:out value="${person.middleInitial}"></c:out></td>
-			<td><c:out value="${person.streetAddress1}"></c:out>,<c:out
-				value="${person.streetAddress2}"></c:out></td>
-			<td><c:out value="${person.city}"></c:out></td>
-			-->
 		</tr>
 	</c:forEach>
 </table>
@@ -42,7 +36,9 @@
 		<li>Last Name:&nbsp;<span id="personLname"></span></li>
 		<li>Address 1:&nbsp;<span id="personAdd1"></span></li>
 		<li>Address 2:&nbsp;<span id="personAdd2"></span></li>
-		<li>City:&nbsp;<span id="personCity"></span></li>
+		<li>City:&nbsp;<span id="personAddCity"></span></li>
+		<li>State:&nbsp;<span id="personAddState"></span></li>
+		<li>Zip:&nbsp;<span id="personAddZip"></span></li>
 	</ul>
 </div>
 

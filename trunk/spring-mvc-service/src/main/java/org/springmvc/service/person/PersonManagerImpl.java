@@ -21,7 +21,6 @@ public class PersonManagerImpl implements PersonManager
 	/* (non-Javadoc)
 	 * @see org.springmvc.service.person.PersonManager#load(java.lang.Long)
 	 */
-	@Override
 	public Person load(int id)
 	{
 		return personDao.load(id);
@@ -30,7 +29,6 @@ public class PersonManagerImpl implements PersonManager
 	/* (non-Javadoc)
 	 * @see org.springmvc.service.person.PersonManager#remove(org.springmvc.model.Person)
 	 */
-	@Override
 	public void remove(Person person)
 	{
 		personDao.remove(person);
@@ -39,7 +37,6 @@ public class PersonManagerImpl implements PersonManager
 	/* (non-Javadoc)
 	 * @see org.springmvc.service.person.PersonManager#save(org.springmvc.model.Person)
 	 */
-	@Override
 	public void save(Person person)
 	{
 		personDao.save(person);
@@ -48,13 +45,11 @@ public class PersonManagerImpl implements PersonManager
 	/* (non-Javadoc)
 	 * @see org.springmvc.service.person.PersonManager#update(org.springmvc.model.Person)
 	 */
-	@Override
 	public Person update(Person person)
 	{
 		return personDao.update(person);
 	}
 
-	@Override
 	public List<Person> loadAll()
 	{
 		return personDao.loadAll();
