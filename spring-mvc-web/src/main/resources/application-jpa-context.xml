@@ -48,15 +48,11 @@
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
 
-	<context:component-scan base-package="org.springmvc.service" />
-	<tx:annotation-driven />
-	<!-- aop:scoped-proxy proxy-target-class="false" / --> 
-	
-	
 	
 	<!-- dwr configuratio -->
 	<dwr:configuration>
 		<dwr:convert type="bean" class="org.springmvc.model.Person"/>
+		<dwr:convert type="bean" class="org.springmvc.model.Address"/>
 	</dwr:configuration>
 	<dwr:controller id="dwrController" debug="true" />
 

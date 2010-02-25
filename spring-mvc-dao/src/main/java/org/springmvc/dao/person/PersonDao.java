@@ -3,6 +3,7 @@
  */
 package org.springmvc.dao.person;
 
+import org.springframework.dao.DataAccessException;
 import org.springmvc.dao.BaseDao;
 import org.springmvc.model.Person;
 
@@ -12,5 +13,5 @@ import org.springmvc.model.Person;
  */
 public interface PersonDao extends BaseDao<Person>
 {
-	
-}
+	Person loadByUsername(String username) throws DataAccessException;
+} 

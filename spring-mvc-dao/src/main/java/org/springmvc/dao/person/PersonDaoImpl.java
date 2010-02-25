@@ -51,4 +51,15 @@ public class PersonDaoImpl extends JpaDaoSupport implements PersonDao
 		Query qry = em.createQuery("select person from Person person");
 		return qry.getResultList();
 	}
+
+	@SuppressWarnings("unchecked")
+	public Person loadByUsername(String username) throws DataAccessException
+	{
+		List<Person> result = getJpaTemplate().findByNamedQuery("loadByUsername", username);
+		if( !result.isEmpty() )
+		{
+			return (Person) result.get(0);
+		}
+		return null;
+	}
 }

@@ -5,15 +5,24 @@ package org.springmvc.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
  * @author Emmanuel Nollase - emanux
  * @created 2010 1 24 - 00:31:52
  */
+@NamedQueries({
+	@NamedQuery(
+		name="loadByUsername",
+		query="select person from Person person where person.username = ?1"
+	)
+})
 @Entity
 @Table(name = "jpa_person")
 public class Person implements Serializable
@@ -25,39 +34,23 @@ public class Person implements Serializable
 	private String firstName;
 	private char middleInitial;
 	private String lastName;
-	private String streetAddress1;
-	private String streetAddress2;
-	private String city;
-	private String state;
-	private String zip;
+	private String username;
+	private String password;
+	
+	@Embedded
+	private Address address = new Address();
 
-	public Person()
-	{
-	}
+	public Person() {
+    }
+ 
+    public Person(final String fn, final char mi, final String ln,
+            final Address address) {
+        setFirstName(fn);
+        setMiddleInitial(mi);
+        setLastName(ln);
+        setAddress(address);
+    }
 
-	public Person(final String fn, final char mi, final String ln,
-			final String sa1, final String sa2, final String city,
-			final String state, final String zip)
-	{
-		setFirstName(fn);
-		setMiddleInitial(mi);
-		setLastName(ln);
-		setStreetAddress1(sa1);
-		setStreetAddress2(sa2);
-		setCity(city);
-		setState(state);
-		setZip(zip);
-	}
-
-	public String getCity()
-	{
-		return city;
-	}
-
-	public void setCity(final String city)
-	{
-		this.city = city;
-	}
 
 	public String getFirstName()
 	{
@@ -99,44 +92,34 @@ public class Person implements Serializable
 		this.middleInitial = middleInitial;
 	}
 
-	public String getState()
+	public Address getAddress()
 	{
-		return state;
+		return address;
 	}
 
-	public void setState(final String state)
+	public void setAddress(Address address)
 	{
-		this.state = state;
+		this.address = address;
 	}
 
-	public String getStreetAddress1()
+	public String getUsername()
 	{
-		return streetAddress1;
+		return username;
 	}
 
-	public void setStreetAddress1(final String streetAddress1)
+	public void setUsername(String username)
 	{
-		this.streetAddress1 = streetAddress1;
+		this.username = username;
 	}
 
-	public String getStreetAddress2()
+	public String getPassword()
 	{
-		return streetAddress2;
+		return password;
 	}
 
-	public void setStreetAddress2(final String streetAddress2)
+	public void setPassword(String password)
 	{
-		this.streetAddress2 = streetAddress2;
-	}
-
-	public String getZip()
-	{
-		return zip;
-	}
-
-	public void setZip(final String zip)
-	{
-		this.zip = zip;
+		this.password = password;
 	}
 
 }
