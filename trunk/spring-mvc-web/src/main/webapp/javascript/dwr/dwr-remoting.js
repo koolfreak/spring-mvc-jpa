@@ -9,8 +9,8 @@ DwrRemotingEvent.getPersonById = function(id) {
 }
 
 DwrRemotingEvent.handleGetPersonById = function(result) {
-	dwr.util.byId('personDetails').style.display = "block";
-	
+	//dwr.util.byId('personDetails').style.display = "block";
+	$("#personDetails").show("slow");
 	dwr.util.setValue('personFname',result.firstName);
 	dwr.util.setValue('personInitial',result.middleInitial);
 	dwr.util.setValue('personLname',result.lastName);
