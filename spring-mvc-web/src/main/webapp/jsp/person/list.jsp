@@ -3,7 +3,8 @@
 
 <html>
 <head>
-	<script type="text/javascript" language="JavaScript"	src="<c:url value='/javascript/dwr/dwr-remoting.js'/>"></script>
+	<script type="text/javascript" src="<c:url value='/javascript/jquery-core.js'/>"></script>
+	<script type="text/javascript" language="JavaScript" src="<c:url value='/javascript/dwr/dwr-remoting.js'/>"></script>
 	<script type="text/javascript" src="<c:url value='/dwr/interface/DwrPersonJavascript.js'/>"></script>
 	<script type="text/javascript" src="<c:url value='/dwr/engine.js'/>"></script>
 	<script type="text/javascript" src="<c:url value='/dwr/util.js'/>"></script>
