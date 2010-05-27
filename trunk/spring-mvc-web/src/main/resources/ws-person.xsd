@@ -1,24 +1,88 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<xs:schema
-		xmlns="http://cybernetics.com/ws/schemas"
-		xmlns:xs="http://www.w3.org/2001/XMLSchema"
-		targetNamespace="http://cybernetics.com/ws/schemas"
-		elementFormDefault="unqualified" attributeFormDefault="unqualified">
-		
-		
-		<xs:element name="PersonDetails">
-			<xs:complexType>
-				<xs:sequence>
-					<xs:element></xs:element>
-				</xs:sequence>
-			</xs:complexType>
-		</xs:element>
-		
-		<xs:element name="Firstname">
-			<xs:simpleType>
-				<xs:restriction base="xs:string">
-					<xs:maxLength value="25"/>
-				</xs:restriction>
-			</xs:simpleType>
-		</xs:element>
+<xs:schema xmlns="http://cybernetics.com/ws/schemas" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://cybernetics.com/ws/schemas" elementFormDefault="unqualified"
+	attributeFormDefault="unqualified">
+
+
+	<xs:element name="PersonDetails">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="FirstName" />
+				<xs:element ref="LastName" />
+				<xs:element ref="MiddleInitial" />
+				<xs:element ref="UserName" />
+				<xs:element ref="Password" />
+				<xs:element ref="AddressDetails" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="AddressDetails">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="StreetAddress1" type="xs:string" />
+				<xs:element name="StreetAddress2" type="xs:string" />
+				<xs:element name="City" type="xs:string" />
+				<xs:element name="State" type="xs:string" />
+				<xs:element name="Zip" type="xs:string" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="RegistrationResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="RegistrationResponseCode" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="RegistrationResponseCode">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="50" />
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+
+	<xs:element name="FirstName">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="25" />
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+
+	<xs:element name="LastName">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="25" />
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+
+	<xs:element name="MiddleInitial">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="1" />
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+
+	<xs:element name="UserName">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="25" />
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+
+	<xs:element name="Password">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="25" />
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+
 </xs:schema>
