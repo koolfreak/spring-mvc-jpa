@@ -43,6 +43,7 @@
     </param-value>
 	</context-param>
 
+	<!-- spring mvc servlet -->
 	<servlet>
 		<description>Spring MVC Dispatcher Servlet</description>
 		<servlet-name>springweb</servlet-name>
@@ -55,11 +56,24 @@
 		<url-pattern>*.htm</url-pattern>
 	</servlet-mapping>
 
+	<!-- spring webservice servlet -->
+	<servlet>
+		<servlet-name>spring-ws</servlet-name>
+		<servlet-class>org.springframework.ws.transport.http.MessageDispatcherServlet</servlet-class>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>spring-ws</servlet-name>
+		<url-pattern>/spring-ws/*</url-pattern>
+	</servlet-mapping>
+	
+	<!-- direct web remoting servlet -->
 	<servlet>
 		<description>DWR Servlet</description>
 		<servlet-name>dwrweb</servlet-name>
 		<servlet-class>org.directwebremoting.spring.DwrSpringServlet</servlet-class>
-		<load-on-startup>2</load-on-startup>
+		<load-on-startup>3</load-on-startup>
 	</servlet>
 
 	<servlet-mapping>
