@@ -25,7 +25,7 @@
 	<bean id="loggingInterceptor" class="org.springframework.ws.server.endpoint.interceptor.PayloadLoggingInterceptor"/>
 	
 
-	<bean id="fileUploadEndpoint" class="org.springmvc.web.ws.endpoint.PersonMarshallingEndpoint">
+	<bean id="personDetailsEndpoint" class="org.springmvc.web.ws.endpoint.PersonMarshallingEndpoint">
 		<property name="marshaller" ref="marshaller" />
 		<property name="unmarshaller" ref="unmarshaller" />
 	</bean>
