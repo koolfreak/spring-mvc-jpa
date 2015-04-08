@@ -3,8 +3,11 @@
  */
 package org.springmvc.service.security;
 
-import org.springframework.security.GrantedAuthority;
-import org.springframework.security.userdetails.UserDetails;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
 
 /**
  * @author Emmanuel Nollase - emanux
@@ -12,7 +15,7 @@ import org.springframework.security.userdetails.UserDetails;
  */
 public class UserCredentials implements UserDetails
 {
-	private GrantedAuthority[] authorities;
+	private Collection<GrantedAuthority> authorities;
 
 	private String password;
 
@@ -27,7 +30,7 @@ public class UserCredentials implements UserDetails
 	private boolean enabled = true; // TODO: apply DB values
 
 	
-	public UserCredentials(GrantedAuthority[] authorities, String password,
+	public UserCredentials(Collection<GrantedAuthority> authorities, String password,
 			String username)
 	{
 		this.authorities = authorities;
@@ -41,7 +44,7 @@ public class UserCredentials implements UserDetails
 	 * @see
 	 * org.springframework.security.userdetails.UserDetails#getAuthorities()
 	 */
-	public GrantedAuthority[] getAuthorities()
+	public Collection<GrantedAuthority> getAuthorities()
 	{
 		return authorities;
 	}

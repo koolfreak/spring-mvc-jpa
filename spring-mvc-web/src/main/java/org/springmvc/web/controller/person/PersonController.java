@@ -8,12 +8,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springmvc.model.Person;
 import org.springmvc.service.person.PersonManager;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author Emmanuel Nollase - emanux
@@ -44,4 +45,14 @@ public class PersonController
 	
 	@RequestMapping(value = "/person/add", method = RequestMethod.GET)
 	public void add(@ModelAttribute(value="person")Person person){}
+
+	@RequestMapping(value="/lookup/{id}", produces="application/json")
+	@ResponseBody
+	public Object getPerson(@PathVariable("id") String id, HttpServletRequest request, HttpServletResponse response){
+		Person person = new Person();
+		person.setFirstName("Eman");
+		person.setLastName("Nollase");
+
+		return person;
+	}
 }

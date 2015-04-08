@@ -5,6 +5,7 @@ package org.springmvc.web.ws.endpoint;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
 import org.springframework.ws.server.endpoint.AbstractMarshallingPayloadEndpoint;
 import org.springws.ws.jaxb.ObjectFactory;
 import org.springws.ws.jaxb.PersonDetails;

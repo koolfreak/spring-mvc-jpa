@@ -2,11 +2,30 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:security="http://www.springframework.org/schema/security"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
-		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-2.0.xsd">
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+
+	<bean id="springSecurityFilter" class="org.springframework.security.web.FilterChainProxy">
+		<security:filter-chain-map request-matcher="ant">
+			<security:filter-chain pattern="/*/bundles/**" filters="none"/>
+			<security:filter-chain pattern="/images/**" filters="none"/>
+			<security:filter-chain pattern="/fonts/**" filters="none"/>
+			<security:filter-chain pattern="/**" filters="securityContextPersistenceFilter, sessionManagementFilter"/>
+		</security:filter-chain-map>
+	</bean>
+
+	<bean id="securityContextPersistenceFilter" class="org.springframework.security.web.context.SecurityContextPersistenceFilter">
+		<property name='securityContextRepository' ref="httpSessionSecurityContextRepository"/>
+		<property name="forceEagerSessionCreation" value="false"/>
+	</bean>
+
+	<bean class='org.springframework.security.web.context.HttpSessionSecurityContextRepository' id="httpSessionSecurityContextRepository">
+		<property name='allowSessionCreation' value='false' />
+	</bean>
+
 
 	<security:http auto-config="true">
-		<security:intercept-url pattern="/**/*.htm" filters="none" />
+		<!--<security:intercept-url pattern="/**/*.htm" filters="none" />-->
 		
 		<security:form-login login-page="/login.jsp"
 							 login-processing-url="/j_spring_security_check"
@@ -16,9 +35,29 @@
         
          <security:remember-me user-service-ref="authManager"/>
     	 <security:logout logout-url="/j_spring_security_logout" logout-success-url="/login.jsp"/>
-		 <security:concurrent-session-control max-sessions="1" exception-if-maximum-exceeded="false"/>
+		 <!--<security:concurrent-session-control max-sessions="1" exception-if-maximum-exceeded="false"/>-->
 	</security:http>
-	
-	<security:authentication-provider user-service-ref="authManager"/>
+
+	<security:authentication-manager alias="authenticationManager">
+		<security:authentication-provider user-service-ref="authManager" />
+	</security:authentication-manager>
+
+	<!-- SESSION MANAGEMENT -->
+	<bean id="redirectStrategy" class="org.springframework.security.web.DefaultRedirectStrategy">
+		<property name="contextRelative" value="true"/>
+	</bean>
+
+	<bean id="invalidSessionStrat" class="org.org.springmvc.util.TimeoutRedirectStrategy">
+		<constructor-arg value="/login.jsp" />
+		<constructor-arg ref="redirectStrategy" />
+	</bean>
+
+	<bean id="sessionManagementFilter" class="org.springframework.security.web.session.SessionManagementFilter" >
+		<constructor-arg ref="httpSessionSecurityContextRepository"/>
+		<property name="invalidSessionStrategy" ref="invalidSessionStrat"/>
+	</bean>
+
+	<bean id="sessionRegistry" class="org.springframework.security.core.session.SessionRegistryImpl" />
+
 	
 </beans>

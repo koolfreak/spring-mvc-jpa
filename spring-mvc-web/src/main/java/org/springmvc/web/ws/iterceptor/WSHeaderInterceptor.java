@@ -30,6 +30,11 @@ public class WSHeaderInterceptor implements EndpointInterceptor
 		return false;
 	}
 
+	@Override
+	public void afterCompletion(MessageContext messageContext, Object o, Exception e) throws Exception {
+
+	}
+
 	/* (non-Javadoc)
 	 * @see org.springframework.ws.server.EndpointInterceptor#handleRequest(org.springframework.ws.context.MessageContext, java.lang.Object)
 	 */

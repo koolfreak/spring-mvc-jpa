@@ -1,10 +1,10 @@
 
 <%@ include file="/includes/include.jsp" %>
-<%@ page import="org.springframework.security.AuthenticationException" %>
-<%@ page import="org.springframework.security.AuthenticationServiceException" %>
-<%@ page import="org.springframework.security.BadCredentialsException" %>
-<%@ page import="org.springframework.security.ui.AbstractProcessingFilter" %>
-<%@ page import="org.springframework.security.ui.webapp.AuthenticationProcessingFilter" %>
+<%@ page import="org.springframework.security.core.AuthenticationException" %>
+<%@ page import="org.springframework.security.authentication.AuthenticationServiceException" %>
+<%@ page import="org.springframework.security.authentication.BadCredentialsException" %>
+<%@ page import="org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter" %>
+<%@ page import="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter" %>
 
 <html>
 	<head>
@@ -13,21 +13,21 @@
 <body>
 	
 		<form name="form" method="POST" action="<c:url value='/j_spring_security_check'/>" style="padding:0px 0px 0px 16px" cellpadding="0" cellspacing="0">
-		<% AuthenticationException authEx = (AuthenticationException) session.getAttribute(AbstractProcessingFilter.SPRING_SECURITY_LAST_EXCEPTION_KEY); %>
+		<% AuthenticationException authEx = (AuthenticationException) session.getAttribute(AbstractAuthenticationProcessingFilter.SPRING_SECURITY_LAST_EXCEPTION_KEY); %>
 		<table>
                 <tr>
                   <td width="20%" align="right">Username:</td>
                   <td width="80%" colspan="2">
-                    <input id="username" class="username" type='text' size="50" name='<%= AuthenticationProcessingFilter.SPRING_SECURITY_FORM_USERNAME_KEY %>'
+                    <input id="username" class="username" type='text' size="50" name='<%= UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY %>'
                     <% if (authEx != null) { %>
-                           value='<%= session.getAttribute(AuthenticationProcessingFilter.SPRING_SECURITY_LAST_USERNAME_KEY) %>'
+                           value='<%= session.getAttribute(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_LAST_USERNAME_KEY) %>'
                     <% } %>></td>
                 </tr>
                 <tr>
                   <td width="20%" align="right">Password:</td>
                   <td width="80%" colspan="2">
                     <input id="password" class="password" type='password' size="50"
-                           name='<%= AuthenticationProcessingFilter.SPRING_SECURITY_FORM_PASSWORD_KEY %>'>
+                           name='<%= UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_PASSWORD_KEY %>'>
                   </td>
                 </tr>
                 <tr>
@@ -39,7 +39,7 @@
                     <font color="red">
                       Login failed. Bad credentials.
                     </font>
-                    <% } else if (authEx.getClass().getName().equals("org.springframework.security.DisabledException")) { %>
+                    <% } else if (authEx.getClass().getName().equals("org.springframework.security.authentication.DisabledException")) { %>
                     <font color="red">
                       Login failed. Account is disabled.
                     </font>

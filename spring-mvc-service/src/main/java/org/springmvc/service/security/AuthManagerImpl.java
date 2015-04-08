@@ -8,9 +8,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.security.userdetails.UserDetails;
-import org.springframework.security.userdetails.UserDetailsService;
-import org.springframework.security.userdetails.UsernameNotFoundException;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springmvc.dao.person.PersonDao;
 import org.springmvc.model.Person;
@@ -36,10 +39,10 @@ public class AuthManagerImpl implements UserDetailsService
 		Person user = personDao.loadByUsername(username);
 		if( user != null)
 		{
-			UserGrantedAuthorities rolesAuth[] = new UserGrantedAuthorities[roles.size()];
+			List<GrantedAuthority> rolesAuth = new ArrayList<GrantedAuthority>();
 			for(int i = 0;i < roles.size(); i++)
 			{
-				rolesAuth[i] = new UserGrantedAuthorities(roles.get(i));
+				rolesAuth.add( new SimpleGrantedAuthority(roles.get(i)));
 			}
 			
 			return new UserCredentials(rolesAuth, user.getPassword(), user.getUsername());

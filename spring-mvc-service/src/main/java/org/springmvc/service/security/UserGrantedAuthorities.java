@@ -3,7 +3,8 @@
  */
 package org.springmvc.service.security;
 
-import org.springframework.security.GrantedAuthority;
+
+import org.springframework.security.core.GrantedAuthority;
 
 /**
  * @author Emmanuel Nollase - emanux
