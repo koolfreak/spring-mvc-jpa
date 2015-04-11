@@ -1,0 +1,26 @@
+<div
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:tiles="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+    <div tiles:fragment="mainContent">
+
+        <h1>Main Content Here - Person List</h1>
+        <table>
+            <thead>
+                <th th:text="#{person.firstname}">First Name</th>
+                <th th:text="#{person.lastname}">Last Name</th>
+                <th th:text="#{person.address}">Address</th>
+            </thead>
+            <tbody>
+                <tr th:each="person : ${persons}">
+                    <td th:text="${person.firstName}"></td>
+                    <td th:text="${person.lastName}"></td>
+                    <td th:text="${person.address.city}"></td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+</div>

@@ -31,8 +31,9 @@ public class PersonController
 		ModelAndView mav = new ModelAndView("person/list");
 		
 		List<Person> ps = personManager.loadAll();
-		
-		return mav.addObject("persons",ps);
+		mav.addObject("persons",ps);
+		mav.setViewName("person/list/Person List");
+		return mav;
 	}
 	
 	@RequestMapping(value = "/person/add", method = RequestMethod.POST)
@@ -43,10 +44,13 @@ public class PersonController
 		return new ModelAndView("redirect:/person/list.htm");
 	}
 	
-	@RequestMapping(value = "/person/add", method = RequestMethod.GET)
-	public void add(@ModelAttribute(value="person")Person person){}
+	@RequestMapping(value = "/person/add",method = RequestMethod.GET )
+	public ModelAndView add(@ModelAttribute(value="person")Person person){
+        ModelAndView mav = new ModelAndView("person/add/Person Add");
+        return mav;
+    }
 
-	@RequestMapping(value="/lookup/{id}", produces="application/json")
+	@RequestMapping(value="/lookup/id", produces="application/json")
 	@ResponseBody
 	public Object getPerson(@PathVariable("id") String id, HttpServletRequest request, HttpServletResponse response){
 		Person person = new Person();

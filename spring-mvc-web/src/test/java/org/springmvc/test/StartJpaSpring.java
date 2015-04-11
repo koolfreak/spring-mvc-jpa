@@ -6,6 +6,8 @@ package org.springmvc.test;
 import org.mortbay.jetty.Connector;
 import org.mortbay.jetty.Server;
 import org.mortbay.jetty.bio.SocketConnector;
+import org.mortbay.jetty.servlet.DefaultServlet;
+import org.mortbay.jetty.servlet.ServletHolder;
 import org.mortbay.jetty.webapp.WebAppContext;
 
 /**
@@ -31,7 +33,13 @@ public class StartJpaSpring
 		WebAppContext bb = new WebAppContext();
 		bb.setServer(server);
 		bb.setContextPath("/spring-jpa");
-		bb.setWar("src/main/webapp");
+		//bb.setResourceBase("spring-mvc-jpa/spring-mvc-web/src/main/webapp");
+		bb.setWar("spring-mvc-jpa/spring-mvc-web/src/main/webapp");
+
+		DefaultServlet defaultServlet = new DefaultServlet();
+		ServletHolder holder = new ServletHolder(defaultServlet);
+		holder.setInitParameter("useFileMappedBuffer", "false");
+		bb.addServlet(holder, "/");
 
 		server.addHandler(bb);
 

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<!--[if IE 8 ]>
+<html class="ie8">
+<![endif]-->
+<!--[if IE 9 ]>
+<html class="ie9">
+<![endif]-->
+<!--[if !IE]><!-->
+<html>
+<!--<![endif]-->
+<head xmlns:th="http://www.thymeleaf.org"
+      xmlns:tiles="http://www.thymeleaf.org"
+      tiles:include="header" />
+
+<body>
+
+<header id="header" tiles:include="pageHeader" />
+<div tiles:include="pageBody" />
+<footer id="footer" tiles:include="pageFooter" />
+
+
+</body>
+</html>
