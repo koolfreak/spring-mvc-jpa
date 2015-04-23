@@ -53,7 +53,7 @@
 
 	<servlet-mapping>
 		<servlet-name>springweb</servlet-name>
-		<url-pattern>*.htm</url-pattern>
+		<url-pattern>/*</url-pattern>
 	</servlet-mapping>
 
 	<!-- spring webservice servlet -->
@@ -68,7 +68,7 @@
 		<url-pattern>/spring-ws/*</url-pattern>
 	</servlet-mapping>
 	
-	<!-- direct web remoting servlet -->
+	<!-- direct web remoting servlet
 	<servlet>
 		<description>DWR Servlet</description>
 		<servlet-name>dwrweb</servlet-name>
@@ -79,7 +79,7 @@
 	<servlet-mapping>
 		<servlet-name>dwrweb</servlet-name>
 		<url-pattern>/dwr/*</url-pattern>
-	</servlet-mapping>
+	</servlet-mapping> -->
 
 	<session-config>
 		<session-timeout>10</session-timeout>

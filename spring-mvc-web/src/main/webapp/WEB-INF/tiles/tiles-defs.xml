@@ -10,12 +10,14 @@
                 <put-attribute name="pageBody" value="/template/blank" />
                 <put-attribute name="pageFooter" value="/template/blank" />
                 <put-attribute name="title" value="Generic Template" type="string" />
+            <put-attribute name="javascript" value="/template/blank" />
         </definition>
 
         <definition name="person/*/*" extends="genericTemplate" templateType="thymeleaf">
                 <put-attribute name="pageHeader" value="/template/pageHeader :: content" type="thymeleaf" />
                 <put-attribute name="pageFooter" value="/template/pageFooter :: content" type="thymeleaf" />
                 <put-attribute name="pageBody" value="/{1} :: mainContent" type="thymeleaf" />
+                <put-attribute name="javascript" value="/{1} :: javascript" type="thymeleaf" />
                 <put-attribute name="title" value="{2}" type="string" cascade="true" />
         </definition>
 

@@ -7,7 +7,45 @@
 
         <h1>Main Content Here - Person Add</h1>
 
+        <form method="post" th:object="${person}" th:action="@{/person/save.htm}">
+            <table>
+                <tr>
+                    <td>First Name:&nbsp;<input th:field="*{firstName}"/></td>
+                </tr>
+                <tr>
+                    <td>Middle Initial:&nbsp;<input th:field="*{middleInitial}"/></td>
+                </tr>
+                <tr>
+                    <td>Last Name:&nbsp;<input th:field="*{lastName}"/></td>
+                </tr>
+                <tr>
+                    <td>Address 1:&nbsp;<input th:field="*{address.streetAddress1}"/></td>
+                </tr>
+                <tr>
+                    <td>Address 2:&nbsp;<input th:field="*{address.streetAddress2}"/></td>
+                </tr>
+                <tr>
+                    <td>City:&nbsp;<input th:field="*{address.city}"/></td>
+                </tr>
+                <tr>
+                    <td>State:&nbsp;<input th:field="*{address.state}"/></td>
+                </tr>
+                <tr>
+                    <td>Zip:&nbsp;<input th:field="*{address.zip}"/></td>
+                </tr>
+            </table>
+            <input type="submit" value="Submit" />
+        </form>
 
+    </div>
+
+    <div tiles:fragment="javascript">
+        <script type="text/javascript"></script>
+        <script type="text/javascript">
+
+             var add_javascript = "";
+
+        </script>
     </div>
 
 </div>

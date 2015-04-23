@@ -36,7 +36,7 @@ public class PersonController
 		return mav;
 	}
 	
-	@RequestMapping(value = "/person/add", method = RequestMethod.POST)
+	@RequestMapping(value = "/person/save", method = RequestMethod.POST)
 	public ModelAndView savePerson(@ModelAttribute(value="person")Person person)
 	{
 		personManager.save(person);
@@ -47,16 +47,12 @@ public class PersonController
 	@RequestMapping(value = "/person/add",method = RequestMethod.GET )
 	public ModelAndView add(@ModelAttribute(value="person")Person person){
         ModelAndView mav = new ModelAndView("person/add/Person Add");
+        mav.addObject("person" , new Person());
         return mav;
     }
 
-	@RequestMapping(value="/lookup/id", produces="application/json")
-	@ResponseBody
-	public Object getPerson(@PathVariable("id") String id, HttpServletRequest request, HttpServletResponse response){
-		Person person = new Person();
-		person.setFirstName("Eman");
-		person.setLastName("Nollase");
-
-		return person;
+	@RequestMapping(value="/lookup/{id}" )
+	public @ResponseBody Person getPerson(@PathVariable Integer id){
+		return personManager.load(id);
 	}
 }

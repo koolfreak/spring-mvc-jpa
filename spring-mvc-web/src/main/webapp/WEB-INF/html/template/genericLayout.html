@@ -18,6 +18,12 @@
 <div tiles:include="pageBody" />
 <footer id="footer" tiles:include="pageFooter" />
 
+ <!-- core javascript -->
+ <script type="text/javascript" th:src="@{/js/core/jquery-1.10.2.min.js}"></script>
+ <script type="text/javascript" th:src="@{/js/core/jquery.ui-1.10.3.js}"></script>
+ <script type="text/javascript" th:src="@{/js/core/bootstrap.min.js}"></script>
+
+ <div tiles:include="javascript"></div>
 
 </body>
 </html>

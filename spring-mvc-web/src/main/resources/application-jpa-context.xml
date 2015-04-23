@@ -49,7 +49,7 @@
 	</bean>
 
 	
-	<!-- dwr configuratio -->
+	<!-- dwr configuratio
 	<dwr:configuration>
 		<dwr:convert type="bean" class="org.springmvc.model.Person"/>
 		<dwr:convert type="bean" class="org.springmvc.model.Address"/>
@@ -78,5 +78,6 @@
 		<property name="personManager" ref="personManager"/>
 		<dwr:remote javascript="DwrPersonJavascript"/>
 	</bean>
+    -->
 
 </beans>
