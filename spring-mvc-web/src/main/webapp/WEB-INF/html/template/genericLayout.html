@@ -14,9 +14,9 @@
 
 <body>
 
-<header id="header" tiles:include="pageHeader" />
-<div tiles:include="pageBody" />
-<footer id="footer" tiles:include="pageFooter" />
+<div class="navbar navbar-inverse navbar-fixed-top" tiles:include="pageHeader" />
+<div class="container" tiles:include="pageBody" />
+<div class="container" tiles:include="pageFooter" />
 
  <!-- core javascript -->
  <script type="text/javascript" th:src="@{/js/core/jquery-1.10.2.min.js}"></script>

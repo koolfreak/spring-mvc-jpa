@@ -41,7 +41,7 @@ public class PersonController
 	{
 		personManager.save(person);
 		
-		return new ModelAndView("redirect:/person/list.htm");
+		return new ModelAndView("redirect:/test/person/list.htm");
 	}
 	
 	@RequestMapping(value = "/person/add",method = RequestMethod.GET )

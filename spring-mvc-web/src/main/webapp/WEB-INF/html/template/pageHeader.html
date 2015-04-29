@@ -3,6 +3,19 @@
      xmlns:tiles="http://www.thymeleaf.org"
      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
-    <h1>Page Header</h1>
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <a class="navbar-brand" href="/c/">Cybernetics</a>
+        </div>
+        <!-- insert individual top bar override -->
+        <div tiles:include="specificPageHeader" class="collapse navbar-collapse" />
+
+    </div>
 
 </div>
