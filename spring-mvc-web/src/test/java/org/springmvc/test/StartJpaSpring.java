@@ -34,7 +34,7 @@ public class StartJpaSpring
 		bb.setServer(server);
 		bb.setContextPath("/");
 		//bb.setResourceBase("spring-mvc-jpa/spring-mvc-web/src/main/webapp");
-		bb.setWar("spring-mvc-jpa/spring-mvc-web/src/main/webapp");
+		bb.setWar("spring-mvc-web/src/main/webapp");
 
 		DefaultServlet defaultServlet = new DefaultServlet();
 		ServletHolder holder = new ServletHolder(defaultServlet);

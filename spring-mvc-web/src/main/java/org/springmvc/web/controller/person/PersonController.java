@@ -8,8 +8,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springmvc.model.Person;
 import org.springmvc.service.person.PersonManager;
 
@@ -37,15 +40,15 @@ public class PersonController
 	}
 	
 	@RequestMapping(value = "/person/save", method = RequestMethod.POST)
-	public ModelAndView savePerson(@ModelAttribute(value="person")Person person)
+	public String savePerson(@ModelAttribute(value="person")Person person, final RedirectAttributes redirectAttributes)
 	{
 		personManager.save(person);
-		
-		return new ModelAndView("redirect:/test/person/list.htm");
+		redirectAttributes.addFlashAttribute("savePerson","Success");
+		return "redirect:/person/list.htm";
 	}
 	
 	@RequestMapping(value = "/person/add",method = RequestMethod.GET )
-	public ModelAndView add(@ModelAttribute(value="person")Person person){
+	public ModelAndView add(){
         ModelAndView mav = new ModelAndView("person/add/Person Add");
         mav.addObject("person" , new Person());
         return mav;

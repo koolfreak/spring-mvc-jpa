@@ -13,6 +13,7 @@
     <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"/>-->
     <!-- Map paths directly to view names without controller processing. Use the view-name attribute if necessary: by convention the view name equals the path without the leading slash -->
     <mvc:resources mapping="/css/**" location="/css/"/>
+    <mvc:resources mapping="/images/**" location="/images/" />
     <mvc:view-controller path="/login" />
     <mvc:view-controller path="/logoutSuccess" />
 
@@ -28,6 +29,9 @@
 		<property name="additionalDialects">
 			<set>
 				<bean class="org.thymeleaf.extras.tiles2.dialect.TilesDialect" />
+				<bean class="org.thymeleaf.extras.conditionalcomments.dialect.ConditionalCommentsDialect" />
+				<bean class="org.thymeleaf.extras.springsecurity3.dialect.SpringSecurityDialect" />
+				<bean class="com.github.dtrunk90.thymeleaf.jawr.dialect.JawrDialect" />
 			</set>
 		</property>
 	</bean>
@@ -58,5 +62,15 @@
         <property name="basename" value="messages" />
     </bean>
 
-	
+    <!-- Base Jawr config -->
+    <bean abstract="true" id="jawrBase" class="net.jawr.web.servlet.JawrSpringController">
+        <property name="configLocation" value="/jawr.properties" />
+        <property name="configuration">
+            <props>
+                <prop key="jawr.debug.on">true</prop> <!-- set to true to initialize jawr to dev mode -->
+                <prop key="jawr.gzip.on">false</prop> <!-- set to false to view indivual js imports in dev mode -->
+            </props>
+        </property>
+    </bean>
+
 </beans>

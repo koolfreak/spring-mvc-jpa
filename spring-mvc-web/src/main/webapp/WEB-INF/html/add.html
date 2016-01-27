@@ -7,7 +7,7 @@
 
         <h1>Main Content Here - Person Add</h1>
 
-        <form method="post" th:object="${person}" th:action="@{/test/person/save.htm}">
+        <form method="post" th:object="${person}" th:action="@{/person/save}">
             <table>
                 <tr>
                     <td>First Name:&nbsp;<input th:field="*{firstName}"/></td>
