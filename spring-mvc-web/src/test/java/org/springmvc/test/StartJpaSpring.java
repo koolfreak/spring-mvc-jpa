@@ -32,7 +32,7 @@ public class StartJpaSpring
 
 		WebAppContext bb = new WebAppContext();
 		bb.setServer(server);
-		bb.setContextPath("/spring-jpa");
+		bb.setContextPath("/");
 		//bb.setResourceBase("spring-mvc-jpa/spring-mvc-web/src/main/webapp");
 		bb.setWar("spring-mvc-jpa/spring-mvc-web/src/main/webapp");
 

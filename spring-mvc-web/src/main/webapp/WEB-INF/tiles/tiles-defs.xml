@@ -13,6 +13,26 @@
             <put-attribute name="javascript" value="/template/blank" />
         </definition>
 
+        <definition name="login" extends="genericTemplate" templateType="thymeleaf">
+            <put-attribute name="pageHeader" value="/template/pageHeader :: content" type="thymeleaf" />
+            <put-attribute name="specificPageHeader" value="/template/blank" type="thymeleaf" cascade="true"/>
+            <put-attribute name="pageFooter" value="/template/pageFooter :: content" type="thymeleaf" />
+            <put-attribute name="pageBody" value="/login :: mainContent" type="thymeleaf" />
+            <put-attribute name="title" value="Login" type="string" cascade="true" />
+            <!-- <put-attribute name="javascript" value="/{1} :: javascript" type="thymeleaf" />
+            -->
+        </definition>
+
+        <definition name="logoutSuccess" extends="genericTemplate" templateType="thymeleaf">
+            <put-attribute name="pageHeader" value="/template/pageHeader :: content" type="thymeleaf" />
+            <put-attribute name="specificPageHeader" value="/template/blank" type="thymeleaf" cascade="true"/>
+            <put-attribute name="pageFooter" value="/template/pageFooter :: content" type="thymeleaf" />
+            <put-attribute name="pageBody" value="/logoutSuccess :: mainContent" type="thymeleaf" />
+            <put-attribute name="title" value="Login" type="string" cascade="true" />
+            <!-- <put-attribute name="javascript" value="/{1} :: javascript" type="thymeleaf" />
+            -->
+        </definition>
+
         <definition name="create" extends="genericTemplate" templateType="thymeleaf">
             <put-attribute name="pageHeader" value="/template/pageHeader :: content" type="thymeleaf" />
             <put-attribute name="specificPageHeader" value="/template/main/createHeader :: content" type="thymeleaf" cascade="true"/>

@@ -1,5 +1,5 @@
 
-<%@ include file="/includes/include.jsp" %>
+<%@ include file="include.jsp" %>
 <%@ page import="org.springframework.security.core.AuthenticationException" %>
 <%@ page import="org.springframework.security.authentication.AuthenticationServiceException" %>
 <%@ page import="org.springframework.security.authentication.BadCredentialsException" %>

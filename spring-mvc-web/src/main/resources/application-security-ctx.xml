@@ -24,17 +24,17 @@
 
     <security:global-method-security secured-annotations="enabled" />
 
-	<security:http auto-config="true" use-expressions="true" access-denied-page="/access_denied.html">
+	<security:http auto-config="true" use-expressions="true" access-denied-page="">
 		<!--<security:intercept-url pattern="/**/*.htm" filters="none" />-->
-        <security:intercept-url pattern="/test/**" access="isAuthenticated()" />
-		<security:form-login login-page="/login.jsp"
-							 login-processing-url="/j_spring_security_check"
-                        	 authentication-failure-url="/login.jsp?login_error=1"
+        <security:intercept-url pattern="/person/**" access="isAuthenticated()" />
+		<security:form-login login-page="/login"
+							 login-processing-url="/loginProcess"
+                        	 authentication-failure-url="/login?login_error=1"
                          	 always-use-default-target="true"
-                         	 default-target-url="/test/person/list.htm"/>
+                         	 default-target-url="/person/list.htm"/>
         
          <security:remember-me user-service-ref="authManager"/>
-    	 <security:logout invalidate-session="true" logout-url="/j_spring_security_logout" logout-success-url="/login.jsp"/>
+    	 <security:logout invalidate-session="true" logout-url="/logout" logout-success-url="/logoutSuccess"/>
 		 <!--<security:concurrent-session-control max-sessions="1" exception-if-maximum-exceeded="false"/>-->
 	</security:http>
 
