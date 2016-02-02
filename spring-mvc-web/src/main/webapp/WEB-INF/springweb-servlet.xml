@@ -32,6 +32,7 @@
 				<bean class="org.thymeleaf.extras.conditionalcomments.dialect.ConditionalCommentsDialect" />
 				<bean class="org.thymeleaf.extras.springsecurity3.dialect.SpringSecurityDialect" />
 				<bean class="com.github.dtrunk90.thymeleaf.jawr.dialect.JawrDialect" />
+				<bean class="org.org.springmvc.util.TestDialect" />
 			</set>
 		</property>
 	</bean>
