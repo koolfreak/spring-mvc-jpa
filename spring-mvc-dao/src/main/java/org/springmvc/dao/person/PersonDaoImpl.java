@@ -21,7 +21,7 @@ import org.springmvc.model.Person;
 public class PersonDaoImpl extends JpaDaoSupport implements PersonDao
 {
 
-	public void save(Person person)
+	public void save(Person person) throws DataAccessException
 	{
 		getJpaTemplate().persist(person);
 	}

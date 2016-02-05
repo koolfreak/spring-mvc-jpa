@@ -16,25 +16,24 @@ import org.springmvc.model.Person;
 /**
  * Unit test for simple App.
  */
-@Transactional
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"/application-jpa-context-test.xml","/app-jpa-dao-ctx-test.xml"})
+@Transactional
 public class AppTest extends AbstractJUnit4SpringContextTests
 {
 
-    private PersonDao personDao;
-
-    @Autowired
-    public void setPersonDao(PersonDao personDao) {
-        this.personDao = personDao;
-    }
+    @Autowired private PersonDao personDao;
 
     @Test
-    @Rollback(false)
     public void testSavePerson(){
+        save();
+    }
+
+    @Transactional
+    private void save(){
         Person person = new Person();
         Address address = new Address();
-        person.setFirstName("Eman");
+        person.setFirstName("Billy");
         person.setLastName("Nollase");
         person.setMiddleInitial('A');
         address.setCity("Pasig");

@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 /**
  * @author Emmanuel Nollase - emanux
@@ -31,6 +32,7 @@ public class Person implements Serializable
 	@Id
 	@GeneratedValue
 	private int id;
+	@Size(min = 5,max = 255)
 	private String firstName;
 	private char middleInitial;
 	private String lastName;
