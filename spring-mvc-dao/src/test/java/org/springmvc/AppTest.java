@@ -35,7 +35,7 @@ public class AppTest extends AbstractJUnit4SpringContextTests
         Address address = new Address();
         person.setFirstName("Billy");
         person.setLastName("Nollase");
-        person.setMiddleInitial('A');
+        person.setMiddleInitial("A");
         address.setCity("Pasig");
         address.setCity("Pasig");
         address.setStreetAddress1("#6 2nd St.");

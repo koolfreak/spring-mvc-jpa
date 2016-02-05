@@ -18,6 +18,7 @@ import org.springmvc.service.person.PersonManager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 /**
  * @author Emmanuel Nollase - emanux
@@ -40,19 +41,34 @@ public class PersonController
 	}
 	
 	@RequestMapping(value = "/person/save", method = RequestMethod.POST)
-	public String savePerson(@ModelAttribute(value="person")Person person, final RedirectAttributes redirectAttributes)
+	public ModelAndView savePerson(@Valid Person person, BindingResult bindingResult, RedirectAttributes redirectAttributes)
 	{
+		if(bindingResult.hasErrors()){
+            ModelAndView mav = new ModelAndView("person/add/Person Add");
+            mav.addObject("person" , person);
+			return mav;
+		}
 		personManager.save(person);
 		redirectAttributes.addFlashAttribute("savePerson","Success");
-		return "redirect:/person/list.htm";
+		return new ModelAndView("redirect:/person/list.htm");
 	}
 	
 	@RequestMapping(value = "/person/add",method = RequestMethod.GET )
-	public ModelAndView add(){
+	public ModelAndView add(Person person){
         ModelAndView mav = new ModelAndView("person/add/Person Add");
-        mav.addObject("person" , new Person());
+        mav.addObject("person" , person);
         return mav;
     }
+
+    @RequestMapping(value = "/person/edit/{id}",method = RequestMethod.GET )
+    public ModelAndView edit(@PathVariable Integer id){
+        Person person = personManager.load(id);
+        ModelAndView mav = new ModelAndView("person/add/Person Add");
+        mav.addObject("person" , person);
+        return mav;
+    }
+
+
 
 	@RequestMapping(value="/lookup/{id}" )
 	public @ResponseBody Person getPerson(@PathVariable Integer id){

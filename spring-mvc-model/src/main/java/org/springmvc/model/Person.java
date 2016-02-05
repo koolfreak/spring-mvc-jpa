@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
@@ -34,7 +36,9 @@ public class Person implements Serializable
 	private int id;
 	@Size(min = 5,max = 255)
 	private String firstName;
-	private char middleInitial;
+	@NotNull
+    @Min(20)
+	private String middleInitial;
 	private String lastName;
 	private String username;
 	private String password;
@@ -75,12 +79,12 @@ public class Person implements Serializable
 		this.lastName = lastName;
 	}
 
-	public char getMiddleInitial()
+	public String getMiddleInitial()
 	{
 		return middleInitial;
 	}
 
-	public void setMiddleInitial(final char middleInitial)
+	public void setMiddleInitial(final String middleInitial)
 	{
 		this.middleInitial = middleInitial;
 	}
