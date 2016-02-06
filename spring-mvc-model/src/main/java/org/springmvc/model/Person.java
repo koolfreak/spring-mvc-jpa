@@ -37,7 +37,7 @@ public class Person implements Serializable
 	@Size(min = 5,max = 255)
 	private String firstName;
 	@NotNull
-    @Min(20)
+    @Size(min = 2)
 	private String middleInitial;
 	private String lastName;
 	private String username;

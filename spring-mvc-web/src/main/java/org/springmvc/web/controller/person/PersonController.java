@@ -4,7 +4,9 @@
 package org.springmvc.web.controller.person;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,12 +27,13 @@ import javax.validation.Valid;
  * @created 2010 1 30 - 23:47:39
  */
 @Controller
+@RequestMapping(value = "/person")
 public class PersonController
 {
 	@Autowired private PersonManager personManager;
 	
-	@RequestMapping(value = "/person/list", method = RequestMethod.GET)
-	public ModelAndView loadAllPerson()
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public ModelAndView index()
 	{
 		ModelAndView mav = new ModelAndView("person/list");
 		
@@ -40,8 +43,8 @@ public class PersonController
 		return mav;
 	}
 	
-	@RequestMapping(value = "/person/save", method = RequestMethod.POST)
-	public ModelAndView savePerson(@Valid Person person, BindingResult bindingResult, RedirectAttributes redirectAttributes)
+	@RequestMapping(value = "/create", method = RequestMethod.POST)
+	public ModelAndView create(@Valid Person person, BindingResult bindingResult, RedirectAttributes redirectAttributes)
 	{
 		if(bindingResult.hasErrors()){
             ModelAndView mav = new ModelAndView("person/add/Person Add");
@@ -49,26 +52,46 @@ public class PersonController
 			return mav;
 		}
 		personManager.save(person);
-		redirectAttributes.addFlashAttribute("savePerson","Success");
-		return new ModelAndView("redirect:/person/list.htm");
+		redirectAttributes.addFlashAttribute("savePerson","Added a Person");
+		return new ModelAndView("redirect:/person/");
 	}
 	
-	@RequestMapping(value = "/person/add",method = RequestMethod.GET )
+	@RequestMapping(value = "/add",method = RequestMethod.GET )
 	public ModelAndView add(Person person){
         ModelAndView mav = new ModelAndView("person/add/Person Add");
         mav.addObject("person" , person);
         return mav;
     }
 
-    @RequestMapping(value = "/person/edit/{id}",method = RequestMethod.GET )
+    @RequestMapping(value = "/edit/{id}",method = RequestMethod.GET )
     public ModelAndView edit(@PathVariable Integer id){
         Person person = personManager.load(id);
-        ModelAndView mav = new ModelAndView("person/add/Person Add");
+        ModelAndView mav = new ModelAndView("person/edit/Person Edit");
         mav.addObject("person" , person);
         return mav;
     }
 
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public ModelAndView update(@Valid Person person, BindingResult bindingResult, RedirectAttributes redirectAttributes)
+    {
+        if(bindingResult.hasErrors()){
+            ModelAndView mav = new ModelAndView("person/edit/Person Edit");
+            mav.addObject("person" , person);
+            return mav;
+        }
+        personManager.update(person);
+        redirectAttributes.addFlashAttribute("savePerson","Success");
+        return new ModelAndView("redirect:/person/");
+    }
 
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
+    public @ResponseBody Map<String, String> destroy(@PathVariable Integer id){
+        Person person = personManager.load(id);
+        personManager.remove(person);
+        Map<String, String> response = new HashMap<String, String>();
+        response.put("success", "true");
+        return response;
+    }
 
 	@RequestMapping(value="/lookup/{id}" )
 	public @ResponseBody Person getPerson(@PathVariable Integer id){

@@ -8,6 +8,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 import org.springmvc.dao.person.PersonDao;
 import org.springmvc.model.Address;
@@ -17,8 +18,9 @@ import org.springmvc.model.Person;
  * Unit test for simple App.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"/application-jpa-context-test.xml","/app-jpa-dao-ctx-test.xml"})
+@ContextConfiguration(locations = {"classpath:application-jpa-context-test.xml","classpath:app-jpa-dao-ctx-test.xml"})
 @Transactional
+@TransactionConfiguration(defaultRollback = false)
 public class AppTest extends AbstractJUnit4SpringContextTests
 {
 
@@ -26,11 +28,6 @@ public class AppTest extends AbstractJUnit4SpringContextTests
 
     @Test
     public void testSavePerson(){
-        save();
-    }
-
-    @Transactional
-    private void save(){
         Person person = new Person();
         Address address = new Address();
         person.setFirstName("Billy");

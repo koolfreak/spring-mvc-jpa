@@ -5,20 +5,26 @@
 
     <div tiles:fragment="mainContent">
 
-        <h1>Main Content Here - Person List</h1>
-        <test:processor />
+        <h1>Person List</h1>
+
         <span th:text="${savePerson}">Success</span>
-        <table>
+        <table class="table">
             <thead>
                 <th th:text="#{person.firstname}">First Name</th>
                 <th th:text="#{person.lastname}">Last Name</th>
                 <th th:text="#{person.address}">Address</th>
+                <th th:text="#{person.address}">Action</th>
             </thead>
             <tbody>
                 <tr th:each="person : ${persons}">
                     <td th:text="${person.firstName}"></td>
                     <td th:text="${person.lastName}"></td>
                     <td th:text="${person.address.city}"></td>
+                    <td>
+                        <a th:href="${'/person/edit/' + person.id }">Edit</a>&nbsp;
+                        <a class="delete-person" th:href="${'/person/delete/' + person.id }">Delete</a>&nbsp;
+
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -29,7 +35,22 @@
         <script type="text/javascript"></script>
         <script type="text/javascript">
 
-             var list_javascript = "";
+             $(document).ready(function(){
+
+                $('.delete-person').click(function(e){
+                    e.preventDefault();
+                    var delete_url = $(this).prop('href');
+                    console.log(delete_url)
+                    $.ajax({
+                        url: delete_url,
+                        type: 'DELETE'
+                    }).done(function(data){
+                        location.reload();
+                    });
+
+                });
+
+             });
 
         </script>
     </div>

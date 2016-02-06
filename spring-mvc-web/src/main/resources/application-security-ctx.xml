@@ -31,7 +31,7 @@
 							 login-processing-url="/loginProcess"
                         	 authentication-failure-url="/login?login_error=1"
                          	 always-use-default-target="true"
-                         	 default-target-url="/person/list.htm"/>
+                         	 default-target-url="/person/"/>
         
          <security:remember-me user-service-ref="authManager"/>
     	 <security:logout invalidate-session="true" logout-url="/logout" logout-success-url="/logoutSuccess"/>
