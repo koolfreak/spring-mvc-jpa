@@ -102,6 +102,10 @@
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-core</artifactId>
 		</dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-ldap</artifactId>
+        </dependency>
 
 		<!-- start: tymeleaf templating -->
 		<dependency>
@@ -133,6 +137,12 @@
 			<groupId>org.apache.tiles</groupId>
 			<artifactId>tiles-core</artifactId>
 			<version>2.2.2</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>jcl-over-slf4j</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.tiles</groupId>
@@ -167,31 +177,6 @@
 			<version>1.1.2</version>
 		</dependency>-->
 
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>1.5.8</version>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<version>1.5.0</version>
-		</dependency>
-
-		<!-- dwr
-		<dependency>
-			<groupId>org.directwebremoting</groupId>
-			<artifactId>dwr</artifactId>
-			<version>2.0.3</version>
-		</dependency> -->
-
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>3.8.1</version>
-			<scope>test</scope>
-		</dependency>
-
 
 		<!-- jetty jsp server -->
 		<dependency>
@@ -212,16 +197,23 @@
 			<version>${jetty.version}</version>
 			<scope>provided</scope>
 		</dependency>
-		<!--
-			jetty for JNDI connection <dependency>
-			<groupId>org.mortbay.jetty</groupId>
-			<artifactId>jetty-naming</artifactId>
-			<version>${jetty.test.version}</version> <scope>provided</scope>
-			</dependency> <dependency> <groupId>org.mortbay.jetty</groupId>
-			<artifactId>jetty-plus</artifactId>
-			<version>${jetty.test.version}</version> <scope>provided</scope>
-			</dependency>
-		-->
+        <dependency>
+            <groupId>org.apache.directory.server</groupId>
+            <artifactId>apacheds-server-jndi</artifactId>
+            <version>1.5.5</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!--
+            jetty for JNDI connection <dependency>
+            <groupId>org.mortbay.jetty</groupId>
+            <artifactId>jetty-naming</artifactId>
+            <version>${jetty.test.version}</version> <scope>provided</scope>
+            </dependency> <dependency> <groupId>org.mortbay.jetty</groupId>
+            <artifactId>jetty-plus</artifactId>
+            <version>${jetty.test.version}</version> <scope>provided</scope>
+            </dependency>
+        -->
 
 	</dependencies>
 

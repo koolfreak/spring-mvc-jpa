@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+
+	<bean id="springSecurityFilter" class="org.springframework.security.web.FilterChainProxy">
+		<security:filter-chain-map request-matcher="ant">
+			<security:filter-chain pattern="/js/**" filters="none"/>
+			<security:filter-chain pattern="/css/**" filters="none"/>
+			<security:filter-chain pattern="/**" filters="securityContextPersistenceFilter, sessionManagementFilter"/>
+		</security:filter-chain-map>
+	</bean>
+
+	<bean id="securityContextPersistenceFilter" class="org.springframework.security.web.context.SecurityContextPersistenceFilter">
+		<property name='securityContextRepository' ref="httpSessionSecurityContextRepository"/>
+		<property name="forceEagerSessionCreation" value="false"/>
+	</bean>
+
+	<bean class='org.springframework.security.web.context.HttpSessionSecurityContextRepository' id="httpSessionSecurityContextRepository">
+		<property name='allowSessionCreation' value='false' />
+	</bean>
+
+    <security:global-method-security secured-annotations="enabled" />
+
+	<security:http auto-config="true" use-expressions="true" access-denied-page="">
+		<!--<security:intercept-url pattern="/**/*.htm" filters="none" />-->
+        <security:intercept-url pattern="/person/**" access="isAuthenticated()" />
+		<security:form-login login-page="/login"
+							 login-processing-url="/loginProcess"
+                        	 authentication-failure-url="/login?login_error=1"
+                         	 always-use-default-target="true"
+                         	 default-target-url="/person/"/>
+
+         <security:remember-me user-service-ref="authManager"/>
+    	 <security:logout invalidate-session="true" logout-url="/logout" logout-success-url="/logoutSuccess"/>
+
+		 <!--<security:concurrent-session-control max-sessions="1" exception-if-maximum-exceeded="false"/> -->
+	</security:http>
+
+	<security:authentication-manager alias="authenticationManager">
+		<security:authentication-provider ref="ldapAuthProvider" />
+	</security:authentication-manager>
+
+	<bean id="contextSource" class="org.springframework.security.ldap.DefaultSpringSecurityContextSource">
+		<constructor-arg value="ldap://127.0.0.1:33389/dc=springframework,dc=org"/>
+		<property name="anonymousReadOnly" value="true"/>
+	</bean>
+
+	<bean id="userSearch" class="org.springframework.security.ldap.search.FilterBasedLdapUserSearch">
+		<constructor-arg index="0" value=""/>
+		<constructor-arg index="1" value="(uid={0})"/>
+		<constructor-arg index="2" ref="contextSource" />
+	</bean>
+
+	<bean id="ldapAuthProvider" class="org.springframework.security.ldap.authentication.LdapAuthenticationProvider">
+		<constructor-arg>
+			<bean class="org.springframework.security.ldap.authentication.BindAuthenticator">
+				<constructor-arg ref="contextSource"/>
+				<property name="userSearch" ref="userSearch" />
+				<!--
+                <beans:property name="userDnPatterns">
+                  <beans:list><beans:value>uid={0},ou=People</beans:value></beans:list>
+                </beans:property>
+                -->
+			</bean>
+		</constructor-arg>
+		<constructor-arg>
+			<bean class="org.springmvc.service.security.LdapCustomPopulator" />
+		</constructor-arg>
+	</bean>
+
+    <!-- for local use -->
+    <security:ldap-server id="ldapLocalServer" ldif="classpath:test-server.ldif" />
+
+
+	<!-- SESSION MANAGEMENT -->
+	<bean id="redirectStrategy" class="org.springframework.security.web.DefaultRedirectStrategy">
+		<property name="contextRelative" value="true"/>
+	</bean>
+
+	<bean id="invalidSessionStrat" class="org.org.springmvc.util.TimeoutRedirectStrategy">
+		<constructor-arg value="/login.jsp" />
+		<constructor-arg ref="redirectStrategy" />
+	</bean>
+
+	<bean id="sessionManagementFilter" class="org.springframework.security.web.session.SessionManagementFilter" >
+		<constructor-arg ref="httpSessionSecurityContextRepository"/>
+		<property name="invalidSessionStrategy" ref="invalidSessionStrat"/>
+	</bean>
+
+	<bean id="sessionRegistry" class="org.springframework.security.core.session.SessionRegistryImpl" />
+
+	
+</beans>
