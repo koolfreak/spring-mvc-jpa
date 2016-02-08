@@ -48,6 +48,16 @@ sn: Hamilton
 uid: bob
 userPassword: bobspassword
 
+dn: uid=freak182,ou=people,dc=springframework,dc=org
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: Eman Nollase
+sn: Nollase
+uid: freak182
+userPassword: qwerty
+
 dn: uid=joe,ou=otherpeople,dc=springframework,dc=org
 objectclass: top
 objectclass: person
