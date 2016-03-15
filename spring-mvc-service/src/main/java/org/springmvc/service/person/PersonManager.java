@@ -24,7 +24,7 @@ public interface PersonManager
 	Person update(Person person);
 
 	@Transactional(readOnly = true)
-	Person load(int id);
+	Person load(Long id);
 
 	@Transactional(readOnly = true)
 	List<Person> loadAll();

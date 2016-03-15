@@ -64,7 +64,7 @@ public class PersonController
     }
 
     @RequestMapping(value = "/edit/{id}",method = RequestMethod.GET )
-    public ModelAndView edit(@PathVariable Integer id){
+    public ModelAndView edit(@PathVariable Long id){
         Person person = personManager.load(id);
         ModelAndView mav = new ModelAndView("person/edit/Person Edit");
         mav.addObject("person" , person);
@@ -85,7 +85,7 @@ public class PersonController
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
-    public @ResponseBody Map<String, String> destroy(@PathVariable Integer id){
+    public @ResponseBody Map<String, String> destroy(@PathVariable Long id){
         Person person = personManager.load(id);
         personManager.remove(person);
         Map<String, String> response = new HashMap<String, String>();
@@ -94,7 +94,7 @@ public class PersonController
     }
 
 	@RequestMapping(value="/lookup/{id}" )
-	public @ResponseBody Person getPerson(@PathVariable Integer id){
+	public @ResponseBody Person getPerson(@PathVariable Long id){
 		return personManager.load(id);
 	}
 }

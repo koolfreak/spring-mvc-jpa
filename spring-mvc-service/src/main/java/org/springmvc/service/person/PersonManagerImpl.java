@@ -3,6 +3,8 @@
  */
 package org.springmvc.service.person;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +23,9 @@ public class PersonManagerImpl implements PersonManager
 	/* (non-Javadoc)
 	 * @see org.springmvc.service.person.PersonManager#load(java.lang.Long)
 	 */
-	public Person load(int id)
+	public Person load(Long id)
 	{
-		return personDao.load(id);
+		return personDao.findOne(id);
 	}
 
 	/* (non-Javadoc)
@@ -31,7 +33,7 @@ public class PersonManagerImpl implements PersonManager
 	 */
 	public void remove(Person person)
 	{
-		personDao.remove(person);
+		personDao.delete(person);
 	}
 
 	/* (non-Javadoc)
@@ -47,12 +49,17 @@ public class PersonManagerImpl implements PersonManager
 	 */
 	public Person update(Person person)
 	{
-		return personDao.update(person);
+		return personDao.save(person);
 	}
 
 	public List<Person> loadAll()
 	{
-		return personDao.loadAll();
+		List<Person> personList = new ArrayList<Person>();
+		 Iterator<Person> persons = personDao.findAll().iterator();
+		while (persons.hasNext()){
+			personList.add(persons.next());
+		}
+		return personList;
 	}
 
 }

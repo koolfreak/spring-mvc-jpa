@@ -22,7 +22,7 @@ import javax.validation.constraints.Size;
  */
 @NamedQueries({
 	@NamedQuery(
-		name="loadByUsername",
+		name="Person.loadByUsername",
 		query="select person from Person person where person.username = ?1"
 	)
 })
@@ -33,7 +33,7 @@ public class Person implements Serializable
 
 	@Id
 	@GeneratedValue
-	private int id;
+	private Long id;
 	@Size(min = 5,max = 255)
 	private String firstName;
 	@NotNull
@@ -59,12 +59,12 @@ public class Person implements Serializable
 		this.firstName = firstName;
 	}
 
-	public int getId()
+	public Long getId()
 	{
 		return id;
 	}
 
-	public void setId(final int id)
+	public void setId(final Long id)
 	{
 		this.id = id;
 	}

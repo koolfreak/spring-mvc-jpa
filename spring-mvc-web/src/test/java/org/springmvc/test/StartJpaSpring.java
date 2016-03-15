@@ -46,6 +46,7 @@ public class StartJpaSpring
 		try {
 			System.out.println(">>> STARTING EMBEDDED JETTY SERVER, PRESS ANY KEY TO STOP");
 			server.start();
+			System.out.println(">>> SERVER STARTED, PRESS ANY KEY TO STOP");
 			while (System.in.available() == 0) {
 				Thread.sleep(5000);
 			}

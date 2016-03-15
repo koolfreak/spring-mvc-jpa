@@ -18,9 +18,7 @@ import org.springmvc.model.Person;
  * Unit test for simple App.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:application-jpa-context-test.xml","classpath:app-jpa-dao-ctx-test.xml"})
-@Transactional
-@TransactionConfiguration(defaultRollback = false)
+@ContextConfiguration(locations = {"classpath*:application-jpa-context-test.xml"})
 public class AppTest extends AbstractJUnit4SpringContextTests
 {
 
@@ -30,20 +28,19 @@ public class AppTest extends AbstractJUnit4SpringContextTests
     public void testSavePerson(){
         Person person = new Person();
         Address address = new Address();
-        person.setFirstName("Billy");
+        person.setFirstName("Test Name");
         person.setLastName("Nollase");
-        person.setMiddleInitial("A");
-        address.setCity("Pasig");
+        person.setMiddleInitial("Alcera");
         address.setCity("Pasig");
         address.setStreetAddress1("#6 2nd St.");
         address.setStreetAddress2("Kapitolyo");
         person.setAddress(address);
         personDao.save(person);
-        System.out.println("person id: => "+person.getId());
+        //System.out.println("person id: => "+person.getId());
     }
 
-    @Test
-    public void testList(){
-        System.out.println(personDao.loadAll());
-    }
+//    @Test
+//    public void testList(){
+//        System.out.println(personDao.findAll());
+//    }
 }
